@@ -1,7 +1,7 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from data_for_tests import users
-from data_for_tests import urls
+from data_for_tests.urls import *
 
 """"Это родительский класс для всех страниц. В нем содержатся базовые методы."""
 
@@ -9,7 +9,7 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
-        self.driver.get(urls.Urls.base_url)
+        self.driver.get(Urls.base_url)
 
     def do_click(self, by_locator):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator)).click()

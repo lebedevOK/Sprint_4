@@ -1,10 +1,16 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
+from data_for_tests.urls import *
 from selenium.webdriver.common.keys import Keys
 import allure
 
 
 class OrderPage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
+        self.driver.get(Urls.base_url)
+
     DATE_FIELD = [By.XPATH, ".//*[@placeholder='* Когда привезти самокат']"]
     DROPDOWN_ARROW = [By.XPATH, ".//*[@class='Dropdown-arrow']"]
     DROPDOWN_OPTION = {
@@ -21,9 +27,11 @@ class OrderPage(BasePage):
         "grey": [By.ID, 'grey']
             }
     COMMENT_FOR_COURIER = [By.XPATH, ".//*[@placeholder='Комментарий для курьера']"]
-    ORDER_BTN = [By.XPATH, ".//*[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM')]"]
+    ORDER_BTN = [By.XPATH, "//body/div[@id='root']/div[1]/div[2]/div[3]/button[2]"]
+    #ORDER_BTN = [By.XPATH, ".//*[contains(@class, 'Button_Button__ra12g Button_Middle__1CSJM')]"]
     CONFIRMATION_BTN = [By.XPATH, "//button[text()='Да']"]
-    success_order_confirmation = [By.XPATH, ".//div[contains(text(), 'Заказ оформлен')]"]
+    #success_order_confirmation = [By.XPATH, ".//div[contains(text(), 'Заказ оформлен')]"]
+    success_order_confirmation = (By.XPATH, "/html/body/div/div/div[2]/div[5]/div[1]")
 
     @allure.step('Заполняем поля в форме об аренде')
     def send_data_about_rent(self, date, duration_rent, color, comment):

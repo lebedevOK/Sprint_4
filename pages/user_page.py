@@ -1,9 +1,15 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 import allure
+from data_for_tests.urls import *
 
 
 class UserPage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver = driver
+        self.driver.get(Urls.base_url)
+
     NAME_FIELD = [By.XPATH, "//input[@placeholder='* Имя']"]
     LASTNAME_FIELD = [By.XPATH, "//input[@placeholder='* Фамилия']"]
     ADDRESS_FIELD = [By.XPATH, "//input[@placeholder='* Адрес: куда привезти заказ']"]

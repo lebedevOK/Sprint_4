@@ -1,6 +1,6 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
-from data_for_tests import urls
+from data_for_tests.urls import *
 import allure
 
 class MainPage(BasePage):
@@ -8,7 +8,7 @@ class MainPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.driver.get(urls.Urls)
+        self.driver.get(Urls.base_url)
 
     questions = {
         1: [By.ID, 'accordion__heading-0'],
@@ -75,3 +75,11 @@ class MainPage(BasePage):
         self.do_click(self.LOGO_YANDEX)
         window_after = self.driver.window_handles[tab]
         self.driver.switch_to.window(window_after)
+
+    def test_move_to_yandex_page(self):
+        #main_page = MainPage(driver)
+        self.do_click(self.LOGO_YANDEX)
+        #driver.get("https://qa-scooter.praktikum-services.ru/")
+        #main_page.click_logo_yandex().click()
+
+
